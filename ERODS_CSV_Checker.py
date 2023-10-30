@@ -47,7 +47,7 @@ def run():
                     print(item.date, item.time_stamp, item.status)
                 csv_data.append(item)
 
-        print("Complete")
+        print("Complete\n\n")
 
     except FileNotFoundError:
         dir_list = os.listdir(WORKING_DIRECTORY)
@@ -62,5 +62,5 @@ def delete():
 
 if __name__ == "__main__":
     print("Welcome to the ERODS CSV Checker!\n\n")
-    run()
-    code.interact(local=locals())
+    while True:
+        run()
