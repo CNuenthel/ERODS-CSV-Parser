@@ -1,7 +1,6 @@
 import csv
 import re
 import os
-import code
 
 # TODO open a print function to allow captured data elements to be printed on text file
 # TODO allow run operation to work in a cyle
