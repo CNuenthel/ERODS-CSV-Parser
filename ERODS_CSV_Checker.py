@@ -51,12 +51,18 @@ def run():
         num_file_dict = {str(i): item for i, item in enumerate(csv_list, 1)}
         file_str = "\n".join([f"{i}. {filename}" for i, filename in num_file_dict.items()])
 
-        csv_number = input(f"\n{Fore.BLUE + 'What is the name of the erods csv that you would like to run?'}\n"
-                           f"---------------------------------------------------------------{Style.RESET_ALL}"
-                           f"\n{file_str}\n"
-                           f"{Fore.BLUE + '---------------------------------------------------------------'}{Style.RESET_ALL}\n")
+        while True:
+            csv_number = input(f"\n{Fore.BLUE + 'Select an ERODs csv file.'}\n"
+                               f"-------------------------{Style.RESET_ALL}"
+                               f"\n{file_str}\n"
+                               f"{Fore.BLUE + '-------------------------'}{Style.RESET_ALL}\n")
 
-        csv_path = f"{WORKING_DIRECTORY / 'erods'}\\{num_file_dict[csv_number]}"
+            if csv_number not in num_file_dict.keys():
+                print("\nPlease select the corresponding number to the csv file you would like to run.")
+
+            else:
+                csv_path = f"{WORKING_DIRECTORY / 'erods'}\\{num_file_dict[csv_number]}"
+                break
 
         pattern = "Inactive|Unidentified|PC|Active"
 
@@ -115,6 +121,7 @@ def run():
 
                     if not moving:
                         continue
+
                     # First instantiation of end of movement
                     if item.odometer != "Missing power-up event":
                         last_odo = item.odometer
@@ -122,7 +129,7 @@ def run():
                     moving = False
                     continue
 
-        print(f"\n** {Fore.MAGENTA + 'Complete'} ** {Style.RESET_ALL}\n\n")
+        print(f"\n** {Fore.MAGENTA + 'Complete'}{Style.RESET_ALL} **\n\n")
 
     elif operation.lower() in ["delete", "2"]:
         csv_list.append("Cancel")
