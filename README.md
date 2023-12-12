@@ -20,6 +20,9 @@ criteria:\
     - Any inactive/changed events triggered from log book edit annotations
     - Any Unidentified driving events
 
+Once you open eCore, you can keep the application open and run new CSV files as you save them throughout
+the day.
+
 ### Data
 The data includes the date and timestamp of each event that can be referenced on ERODS. Odometer skip events
 will also include the amount of miles calculated between a non-driving event and an initial following driving

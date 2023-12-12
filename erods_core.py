@@ -33,7 +33,7 @@ class RowData:
 def run():
     csv_list = os.listdir(WORKING_DIRECTORY / "erods")
 
-    operation = input(f"\n{Fore.BLUE + 'Please select an operation'}:\n"
+    operation = input(f"\n{Fore.BLUE + 'Please input an operation'}:\n"
                       f"--------------------------{Style.RESET_ALL}\n"
                       f"1.{Fore.GREEN + 'Run'}{Style.RESET_ALL}\n"
                       f"2.Delete CSV\n"
@@ -62,7 +62,7 @@ def run():
 
         non_driving_categories = ["Sleeper Berth", "Power-up", "On-duty, not driving", "Off-duty", "PC/YM Cleared",
                                   "Shut-down"]
-        driving_categories = ["Driving", "Intermediate log", "PC"]
+        driving_categories = ["Driving", "PC"]
 
         with open(csv_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -124,7 +124,6 @@ def run():
 
         print(f"\n** {Fore.MAGENTA + 'Complete'}{Style.RESET_ALL} **\n")
 
-        # TODO complete file saving operations
         save_data = input("Save results to file? Y/N\n")
 
         if save_data.lower() == "y":
@@ -133,6 +132,8 @@ def run():
                 f.write("\n".join(data))
 
             print(f"\n{Fore.GREEN}Data saved to {num_file_dict[csv_number][:-4]}.txt{Style.RESET_ALL}")
+        else:
+            print(f"\n{Fore.RED}No file saved.{Style.RESET_ALL}")
 
     elif operation.lower() in ["delete", "2"]:
         csv_list.append("Cancel") # Add cancel to the list to allow for cancellation operation
@@ -167,7 +168,7 @@ def run():
         sys.exit()
 
     else:
-        print("Please select a valid operation, Run, Delete, or Quit")
+        print("\nPlease select a valid operation, Run, Delete, or Quit.")
 
 
 if __name__ == "__main__":
