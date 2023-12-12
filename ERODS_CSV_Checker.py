@@ -1,15 +1,9 @@
 import csv
 import re
 import os
-import logging
 import sys
 from pathlib import Path
-from colorama import init, Fore, Style
-import win32print
-import win32ui
-
-# TODO open a print function to allow captured data elements to be printed on text file
-# TODO allow run operation to work in a cycle
+from colorama import Fore, Style
 
 # Establish standard path for erods file reading
 WORKING_DIRECTORY = Path(os.getcwd())
@@ -118,7 +112,6 @@ def run():
                     continue
 
                 elif item.status in non_driving_categories and item.odometer:
-
                     if not moving:
                         continue
 
@@ -129,10 +122,21 @@ def run():
                     moving = False
                     continue
 
-        print(f"\n** {Fore.MAGENTA + 'Complete'}{Style.RESET_ALL} **\n\n")
+        print(f"\n** {Fore.MAGENTA + 'Complete'}{Style.RESET_ALL} **\n")
+
+        # TODO complete file saving operations
+        save_data = input("Save results to file? Y/N\n")
+
+        if save_data.lower() == "y":
+            # Save data to folder
+            with open(WORKING_DIRECTORY / f"{num_file_dict[csv_number][:-4]}.txt", "w") as f:
+                f.write("\n".join(data))
+
+            print(f"\n{Fore.GREEN}Data saved to {num_file_dict[csv_number][:-4]}.txt{Style.RESET_ALL}")
 
     elif operation.lower() in ["delete", "2"]:
-        csv_list.append("Cancel")
+        csv_list.append("Cancel") # Add cancel to the list to allow for cancellation operation
+
         num_file_dict = {str(i): item for i, item in enumerate(csv_list, 1)}
         file_str = "\n".join([f"{i}. {filename}" for i, filename in num_file_dict.items()])
 
