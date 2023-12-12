@@ -58,12 +58,12 @@ def run():
                                f"{Fore.BLUE + '-------------------------'}{Style.RESET_ALL}\n")
 
             if csv_number not in num_file_dict.keys():
-                print("\nPlease select the corresponding number to the csv file you would like to run.")
+                print("\nPlease input the corresponding number to the csv file you would like to run.")
 
             else:
-                csv_path = f"{WORKING_DIRECTORY / 'erods'}\\{num_file_dict[csv_number]}"
                 break
 
+        csv_path = f"{WORKING_DIRECTORY / 'erods'}\\{num_file_dict[csv_number]}"
         pattern = "Inactive|Unidentified|PC|Active"
 
         non_driving_categories = ["Sleeper Berth", "Power-up", "On-duty, not driving", "Off-duty", "PC/YM Cleared",
@@ -136,12 +136,19 @@ def run():
         num_file_dict = {str(i): item for i, item in enumerate(csv_list, 1)}
         file_str = "\n".join([f"{i}. {filename}" for i, filename in num_file_dict.items()])
 
-        csv_number = input(f"\n{Fore.BLUE + 'Select a csv file to delete or cancel.'}\n"
-                           f"--------------------------------------------------------------{Style.RESET_ALL}\n"
-                           f"{file_str}\n"
-                           f"{Fore.BLUE + '--------------------------------------------------------------'}{Style.RESET_ALL}\n")
+        while True:
+            csv_number = input(f"\n{Fore.BLUE + 'Select a csv file to delete or cancel.'}\n"
+                               f"--------------------------------------------------------------{Style.RESET_ALL}\n"
+                               f"{file_str}\n"
+                               f"{Fore.BLUE + '--------------------------------------------------------------'}{Style.RESET_ALL}\n")
+
+            if csv_number not in num_file_dict.keys():
+                print("\nPlease input the corresponding number to the csv file you would like to delete.")
+            else:
+                break
 
         if num_file_dict[csv_number] == "Cancel":
+            print("\nOperation Canceled...")
             return
 
         csv_path = f"{WORKING_DIRECTORY / 'erods'}\\{num_file_dict[csv_number]}"
