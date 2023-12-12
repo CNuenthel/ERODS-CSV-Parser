@@ -1,3 +1,4 @@
+# ![logo](assets/erodscore_logo_white.png)
 To use the ERODS CSV Checker:
 
 You must have Python downloaded and installed on your machine.
