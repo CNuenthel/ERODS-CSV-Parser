@@ -7,7 +7,7 @@ within event data, getting you through the logbook inspection with nothing left 
 ### Process
     - Transfer driver ELD data to FMCSA
     - Open ELD data using ERODS
-    - Click [File] -> [Output Event List to CSV]
+    - Click [File] -> [Download event list as CSV]
     - Save file to "erods" folder within ERODS Core directory
     - Run ERODS Core application and select your saved CSV
 
