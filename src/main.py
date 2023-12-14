@@ -3,12 +3,19 @@ import re
 import os
 import sys
 from pathlib import Path
-from colorama import Fore, Style
+from colorama import Fore, Style, init
+
+# Init Colorama to factor for multiple systems
+init()
 
 # Establish standard path for erods file reading
 WORKING_DIRECTORY = Path(os.getcwd())
 
-
+# Verify that an erods directory exists, if it does not create it
+if not os.path.exists(WORKING_DIRECTORY / "erods"):
+    print(f"\n{Fore.BLUE + 'No erods directory found... Creating erods directory'}{Style.RESET_ALL}\n")
+    os.mkdir(WORKING_DIRECTORY / "erods")
+    
 # Helper function to sort and return a string into only its numbers
 def format_number_string(num_str: str) -> int:
     return int(re.sub(r',', '', num_str))
@@ -46,6 +53,10 @@ def run():
         file_str = "\n".join([f"{i}. {filename}" for i, filename in num_file_dict.items()])
 
         while True:
+            if not csv_list:
+                print(f"\n{Fore.RED + 'No CSV files found'}{Style.RESET_ALL}")
+                run()
+                
             csv_number = input(f"\n{Fore.BLUE + 'Select an ERODs csv file.'}\n"
                                f"-------------------------{Style.RESET_ALL}"
                                f"\n{file_str}\n"
@@ -61,8 +72,8 @@ def run():
         pattern = "Inactive|Unidentified|PC|Active"
 
         non_driving_categories = ["Sleeper Berth", "Power-up", "On-duty, not driving", "Off-duty", "PC/YM Cleared",
-                                  "Shut-down"]
-        driving_categories = ["Driving", "PC"]
+                                  "Shut-down", "PC"]
+        driving_categories = ["Driving"]
 
         with open(csv_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
